@@ -13,6 +13,9 @@ import static com.accuweather.validators.AccuWeatherAPIValidator.*;
 import static com.accuweather.validators.AccuWeatherWebValidator.recordWebTempData;
 import static com.accuweather.validators.AccuWeatherWebValidator.validateWebTemp;
 import static com.accuweather.validators.CommonValidators.loadPage;
+import static com.accuweather.validators.CompareTempValidator.*;
+import static com.accuweather.validators.CompareTempValidator.validateVariance;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 //Step Definition class for the steps mentioned in the feature file
@@ -98,5 +101,24 @@ public class AccuWeatherSteps extends CommonCode {
         } catch (Exception e) {
             ExtentCucumberAdapter.addTestStepLog("**INFO:Issue while writing the response in file.**");
         }
+    }
+
+    @Given("^user read temperature values of \"([^\"]*)\"$")
+    public void readTemperatureValues(String city) {
+        assertNotEquals("Temperature value in web is not correct.", null, getWebTempValues(city));
+        assertNotEquals("Temperature value returned from API is not correct.", null, getAPITempValues());
+        ExtentCucumberAdapter.addTestStepLog("**INFO:Read both web and API temperature value.**");
+    }
+
+    @When("^user compare both temperature values of \"([^\"]*)\"$")
+    public void compareBothTemp(String city) {
+        assertTrue("Web and API Temperature values are not matching.", compareTempValues(city));
+        ExtentCucumberAdapter.addTestStepLog("**INFO:Temperature value in both web and api are same.**");
+    }
+
+    @Then("^temperature difference should be within range for \"([^\"]*)\"$")
+    public void validateTemperatureDiffRange(String city) {
+        assertTrue("Temperature difference is not within range.", validateVariance(city));
+        ExtentCucumberAdapter.addTestStepLog("**INFO:Temperature difference between web and api are within range.**");
     }
 }

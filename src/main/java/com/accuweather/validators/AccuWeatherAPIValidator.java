@@ -11,7 +11,11 @@ import static com.accuweather.common.helper.APIHelper.*;
 public class AccuWeatherAPIValidator {
     private static final Response response = getResponse();
 
-    //Method to validate the status code of API response
+    /**
+     * Method to validate the status code of API response
+     * Returns true if the api response code is 200
+     * else will return false
+     **/
     public static boolean validateResponseStatusCode() {
         try {
             int statusCode = response.statusCode();

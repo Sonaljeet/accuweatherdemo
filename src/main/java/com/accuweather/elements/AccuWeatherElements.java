@@ -18,11 +18,11 @@ public class AccuWeatherElements extends CommonCode {
 
     //Locating elements
     @FindBy(className = "search-input")
-    private WebElement searchBox;
+    WebElement searchBox;
     @FindBy(partialLinkText = "Bengaluru,")
-    private WebElement cityLink;
+    WebElement cityLink;
     @FindBy(className = "temp")
-    private WebElement temperature;
+    WebElement temperature;
 
     //Method to implement the entering city functionality in the search box of web page
     public boolean enterCity(String city) {

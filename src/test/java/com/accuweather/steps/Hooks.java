@@ -9,7 +9,7 @@ public class Hooks extends CommonCode {
 
     /**
      * This method will invoke after every step mentioned in the feature file.
-     * Method is applicable for scenarios related to Web application.
+     * Method is applicable for scenarios for Web application.
      **/
     @AfterStep("@Web")
     public void addScreenshotAfterFailedStep(Scenario scenario) {

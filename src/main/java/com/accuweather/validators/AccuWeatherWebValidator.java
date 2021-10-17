@@ -9,6 +9,11 @@ import static com.accuweather.common.utilities.ReadWriteDataInJson.writeDataInJs
 public class AccuWeatherWebValidator extends CommonCode {
     private final static AccuWeatherElements obj = new AccuWeatherElements(driver);
 
+    /**
+     * Validate the temperature value in accuweather web page.
+     * Return true if value exists
+     * else return false
+     **/
     public static boolean validateWebTemp() {
         try {
             String temp = obj.getCityTemp();
