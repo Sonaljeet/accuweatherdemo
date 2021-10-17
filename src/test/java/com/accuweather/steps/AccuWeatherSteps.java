@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
+import static com.accuweather.validators.AccuWeatherAPIValidator.*;
 import static com.accuweather.validators.AccuWeatherWebValidator.recordWebTempData;
 import static com.accuweather.validators.AccuWeatherWebValidator.validateWebTemp;
 import static com.accuweather.validators.CommonValidators.loadPage;
@@ -66,6 +67,36 @@ public class AccuWeatherSteps extends CommonCode {
             ExtentCucumberAdapter.addTestStepLog("**INFO:Successfully recorded temperature value.**");
         } catch (Exception e) {
             ExtentCucumberAdapter.addTestStepLog("**INFO:Issue while recording temperature value.**");
+        }
+    }
+
+    @Given("^user create the uri and make the API call$")
+    public void createAndCallAPI() {
+        try {
+            assertTrue("Issue in response.", validateResponse());
+            ExtentCucumberAdapter.addTestStepLog("**INFO:User successfully made the API call.**");
+        } catch (Exception e) {
+            ExtentCucumberAdapter.addTestStepLog("**INFO:Issue while making the API call.**");
+        }
+    }
+
+    @Then("^the status of the response should be 200$")
+    public void validateStatusCode() {
+        try {
+            assertTrue("Status code is not 200", validateResponseStatusCode());
+            ExtentCucumberAdapter.addTestStepLog("**INFO:Response status code is 200.**");
+        } catch (Exception e) {
+            ExtentCucumberAdapter.addTestStepLog("**INFO:Issue while validating the status code.**");
+        }
+    }
+
+    @And("^user create file and write response in it$")
+    public void writeResponseInFile() {
+        try {
+            assertTrue("Response not written.", writeAPIResponseInJsonFile());
+            ExtentCucumberAdapter.addTestStepLog("**INFO:Successfully recorded response in json file.**");
+        } catch (Exception e) {
+            ExtentCucumberAdapter.addTestStepLog("**INFO:Issue while writing the response in file.**");
         }
     }
 }
