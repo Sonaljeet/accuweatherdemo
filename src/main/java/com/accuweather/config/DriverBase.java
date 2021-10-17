@@ -23,7 +23,7 @@ public class DriverBase {
                 case "chrome":
                 case "Chrome":
                     String path = System.getProperty("user.dir") + rb.getString("chromedriverpath");
-                    String crxPath = System.getProperty("user.dir") + rb.getString("chromecrx");
+//                    String crxPath = System.getProperty("user.dir") + rb.getString("chromecrx");
                     System.setProperty("webdriver.chrome.driver", path);
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
@@ -31,7 +31,7 @@ public class DriverBase {
                     chromeOptions.addArguments("--no-proxy-server");
                     chromeOptions.addArguments("--disable-cache");
                     chromeOptions.addArguments("--disable-web-security");
-                    chromeOptions.addExtensions(new File(crxPath));
+//                    chromeOptions.addExtensions(new File(crxPath));
                     driver = new ChromeDriver(chromeOptions);
                     break;
                 case "edge":
